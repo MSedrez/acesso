@@ -1,6 +1,7 @@
 package com.senai.acesso.services;
 
 import com.senai.acesso.dtos.UsuarioDto;
+import com.senai.acesso.dtos.UsuarioRespostaDto;
 import com.senai.acesso.models.UsuarioEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,6 @@ public class UsuarioService {
         //--Preciso verificar se o usuário já foi cadastrado
         //--Estrutura de repetição para lista de objetos
         for (UsuarioEntity usuario : lista) {
-
             //--Para cada item da lista verifica se o cpf do item da lista é igual ao cpf do usuário do DTO
             if (usuario.getCpf().equals(usuarioDto.getCpf())) {
                 //--Se for igual, significa que o cpf já foi cadastrado na lista
@@ -55,6 +55,21 @@ public class UsuarioService {
 
         //--Se deu certo cadastrar o usuário eu retrorno verdadeiro (true)
         return true;
+    }
+
+    public List<UsuarioRespostaDto> listarUsuarios(){
+
+        List<UsuarioRespostaDto> listaResposta = new ArrayList<UsuarioRespostaDto>();
+
+        for (UsuarioEntity usuario : lista) {
+            UsuarioRespostaDto respostaDto = new UsuarioRespostaDto();
+            respostaDto.setCpf(usuario.getCpf());
+            respostaDto.setLogin(usuario.getLogin());
+            respostaDto.setNome(usuario.getNome());
+            listaResposta.add(respostaDto);
+        }
+
+        return listaResposta;
     }
 
 }

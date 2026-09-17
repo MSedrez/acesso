@@ -1,12 +1,13 @@
 package com.senai.acesso.controllers;
 
 import com.senai.acesso.dtos.UsuarioDto;
+import com.senai.acesso.dtos.UsuarioRespostaDto;
 import com.senai.acesso.services.UsuarioService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -37,6 +38,17 @@ public class UsuarioController {
         }
 
     }
+
+
+    @GetMapping("/usuarios")
+    public ResponseEntity<List<UsuarioRespostaDto>> listarUsuarios(){
+
+        List<UsuarioRespostaDto> lista = service.listarUsuarios();
+        return ResponseEntity.ok().body(lista);
+
+    }
+
+
 
 
 
